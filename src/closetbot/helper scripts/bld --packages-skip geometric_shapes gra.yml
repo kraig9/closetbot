@@ -1,0 +1,1 @@
+bld --packages-skip geometric_shapes grasping_msgs rviz_visual_tools my_rotate_bot ros_deep_learning moveit2_scripts simple_grasping closetbot_hardware_interface image_view

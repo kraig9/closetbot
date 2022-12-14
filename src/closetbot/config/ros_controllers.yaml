@@ -1,0 +1,50 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 6
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - bases
+      - B_Rot->In_1
+      - In_1->Join
+      - Join->In_2
+      - In_2->EE
+      - Join->Out_1
+      - Join->Out_2
+
+      # - EE->GripperMount
+
+      - GripperMount->GripperAxis
+
+      # - GripperAxis->GripperFingerA1
+      - GripperFingerA1->GripperFingerA2
+      - GripperFingerA2->GripperFingerA3
+      - GripperFingerA3->GripperFingerA4
+      - GripperFingerA4->GripperFingerA5
+
+      # - GripperAxis->GripperFingerB1
+      - GripperFingerB1->GripperFingerB2
+      - GripperFingerB2->GripperFingerB3
+      - GripperFingerB3->GripperFingerB4
+      - GripperFingerB4->GripperFingerB5
+
+      # - GripperAxis->GripperFingerB1
+      - GripperFingerC1->GripperFingerC2
+      - GripperFingerC2->GripperFingerC3
+      - GripperFingerC3->GripperFingerC4
+      - GripperFingerC4->GripperFingerC5
+
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+    state_publish_rate: 20.0
+    action_monitor_rate: 10.0
+    allow_partial_joints_goal: false

@@ -1,0 +1,1298 @@
+<?xml version="1.0"?>
+<robot name="DexArm_unofficial" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="includes.xacro" />
+  <link name="world"></link>
+  <link name="B_Fix">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/00-B_Fix.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/00-B_Fix.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <!-- <joint name="base_joint" type="fixed">
+      <origin xyz="0 0 3" rpy="0 ${radians(180)} 0"/>
+      <parent link="world"/>
+      <child link="B_Fix"/>        
+  </joint> -->
+  <joint name="base_joint" type="fixed">
+    <origin xyz="0 0 .5" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="B_Fix"/>        
+  </joint>
+  <link name="B_Rot">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/01-B_Rot.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/01-B_Rot.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="bases" type="revolute">
+    <parent link="B_Fix" />
+    <child link="B_Rot" />
+    <limit effort="30" lower="-1.91986" upper="1.91986" velocity="1.74533" />
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="In_1">
+    <visual>
+      <origin xyz="0 0.022 -0.127" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/02-In_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0.022 -0.127" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/02-In_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="B_Rot->In_1" type="revolute">
+    <parent link="B_Rot" />
+    <child link="In_1" />
+    <limit effort="30" lower="0" upper="1.57" velocity="1.74533" />
+    <origin xyz="0 -0.02 0.13" rpy="0 0 0"/>
+    <axis xyz="1 0 0" />
+  </joint>
+
+  <link name="Join">
+    <visual>
+      <origin xyz="0 0.0332 -0.277" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/03-Join.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0.0332 -0.277" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/03-Join.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="In_1->Join" type="revolute">
+    <parent link="In_1" />
+    <child link="Join" />
+    <limit effort="30" lower="-1.57" upper="0" velocity="1.74533" />
+    <origin xyz="0 -0.0112 0.15" rpy="0 0 0"/>
+    <axis xyz="1 0 0" />
+    <mimic joint="B_Rot->In_1" multiplier="-1" offset="0" />
+  </joint>
+
+  <link name="In_2">
+    <visual>
+      <origin xyz="0 0.034 -0.276" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/04-In_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0.033 -0.279" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/04-In_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="Join->In_2" type="revolute">
+    <parent link="Join" />
+    <child link="In_2" />
+    <limit effort="30" lower="-0.6" upper="1.2" velocity="1.74533" />
+    <origin xyz="0.0 -0.0003 -0.0003" rpy="0 0 0"/>
+    <axis xyz="1 0 0" />
+  </joint>
+
+  <link name="EE">
+    <visual>
+      <origin xyz="0.0 0.172 -0.218" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/05-EE.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.172 -0.215" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/05-EE.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="In_2->EE" type="revolute">
+    <parent link="In_2" />
+    <child link="EE" />
+    <limit effort="30" lower="-0.6" upper="1.2" velocity="1.74533" />
+    <origin xyz="0 -0.138 -0.058" rpy="0 0 0"/>
+    <axis xyz="1 0 0" />
+    <mimic joint="Join->In_2" multiplier="-1" offset="0" />
+  </joint>
+
+  <link name="Out_1">
+    <visual>
+      <origin xyz="0 0.005 -0.301" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/06-Out_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0.003 -0.305" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/06-Out_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="Join->Out_1" type="revolute">
+    <parent link="Join" />
+    <child link="Out_1" />
+    <limit effort="30" lower="0" upper="1.57" velocity="1.74533" />
+    <origin xyz="0 0.0285 0.024" rpy="0 0 0"/>
+    <axis xyz="1 0 0" />
+    <mimic joint="B_Rot->In_1" multiplier="1" offset="0" />
+  </joint>
+
+  <link name="Out_2">
+    <visual>
+      <origin xyz="0 0.058 -0.307" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/07-Out_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0.057 -0.307" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/07-Out_2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="Join->Out_2" type="revolute">
+    <parent link="Join" />
+    <child link="Out_2" />
+    <limit effort="30" lower="-0.6" upper="1.2" velocity="1.74533" />
+    <origin xyz="0 -0.024 0.0294" rpy="0 0 0"/>
+    <axis xyz="1 0 0" />
+    <mimic joint="Join->In_2" multiplier="1" offset="0" />
+  </joint>
+
+
+  <!-- <link name="Suction">
+    <visual>
+      <origin xyz="-0.077 -0.134 -0.003" rpy="0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M01-Suction.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.077 -0.134 -0.003" rpy="0 3.14 1.57"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M01-Suction.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="EE->Suction" type="fixed">
+    <parent link="EE" />
+    <child link="Suction" />
+    <limit effort="30" lower="-0.6" upper="1.2" velocity="1.74533" />
+    <origin xyz="0 -0.05 0.01" rpy="0 0 0"/>
+    <axis xyz="1 0 0" />
+  </joint>  -->
+ 
+
+  <link name="GripperMount">
+    <visual>
+      <origin xyz="-0.077 -0.134 -0.003" rpy="0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperMount.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.077 -0.134 -0.003" rpy="0 3.14 1.57"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperMount.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="EE->GripperMount" type="fixed">
+    <parent link="EE" />
+    <child link="GripperMount" />
+    <limit effort="30" lower="-0.6" upper="1.2" velocity="1.74533" />
+    <origin xyz="0 -0.05 0.01" rpy="0 0 0"/>
+    <axis xyz="1 0 0" />
+  </joint>
+
+  <link name="GripperAxis">
+    <visual>
+      <origin xyz="-0.075 -0.075 -0.000" rpy="0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperAxis.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.075 -0.075 -0.000" rpy="0 3.14 1.57"/>
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperAxis.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperMount->GripperAxis" type="continuous">
+    <parent link="GripperMount" />
+    <child link="GripperAxis" />
+    <limit effort="30" velocity="1.74533" />
+    <origin xyz="-0.002 -0.06 0.0" rpy="0 0 0"/>
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="GripperFingerA1">
+    <visual>
+      <origin xyz="-0.054 -0.075 0.036" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.054 -0.075 0.036" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperAxis->GripperFingerA1" type="fixed">
+    <parent link="GripperAxis" />
+    <child link="GripperFingerA1" />
+    <limit effort="30" velocity="1.74533" />
+    <origin xyz="-0.020 0.00 -0.042" rpy="0 0 0"/>
+    <axis xyz="0 0 1" />
+  </joint>
+  <link name="GripperFingerA2">
+    <visual>
+      <origin xyz="-0.057 -0.075 0.0440" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.057 -0.075 0.0440" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerA1->GripperFingerA2" type="revolute">
+    <parent link="GripperFingerA1" />
+    <child link="GripperFingerA2" />
+    <limit effort="30" lower="-0.3" upper="0.0" velocity="1.74533" />
+    <origin xyz="0.003 0.00 -0.008" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+  </joint>
+  <link name="GripperFingerA3">
+    <visual>
+      <origin xyz="-0.0575 -0.075 0.0510" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.0575 -0.075 0.0510" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerA2->GripperFingerA3" type="revolute">
+    <parent link="GripperFingerA2" />
+    <child link="GripperFingerA3" />
+    <limit effort="30" lower="-0.3" upper="0.0" velocity="1.74533" />
+    <origin xyz="0.0005 0.00 -0.007" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+    <mimic joint="GripperFingerA1->GripperFingerA2" multiplier="1" offset="0" />
+  </joint>
+  <link name="GripperFingerA4">
+    <visual>
+      <origin xyz="-0.0580 -0.075 0.0580" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger4.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.0580 -0.075 0.0580" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger4.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerA3->GripperFingerA4" type="revolute">
+    <parent link="GripperFingerA3" />
+    <child link="GripperFingerA4" />
+    <limit effort="30" lower="-0.3" upper="0.0" velocity="1.74533" />
+    <origin xyz="0.0005 0.00 -0.007" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+    <mimic joint="GripperFingerA1->GripperFingerA2" multiplier="1" offset="0" />
+  </joint>
+  <link name="GripperFingerA5">
+    <visual>
+      <origin xyz="-0.0585 -0.075 0.0650" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.0585 -0.075 0.0650" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerA4->GripperFingerA5" type="revolute">
+    <parent link="GripperFingerA4" />
+    <child link="GripperFingerA5" />
+    <limit effort="30" lower="-0.3" upper="0.0" velocity="1.74533" />
+    <origin xyz="0.0005 0.00 -0.007" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+    <mimic joint="GripperFingerA1->GripperFingerA2" multiplier="1" offset="0" />
+  </joint>
+
+  <link name="GripperFingerB1">
+    <visual>
+      <origin xyz="-0.038 0.084 0.036" rpy="0.0 3.14 5.76" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.038 0.084 0.036" rpy="0.0 3.14 5.76" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperAxis->GripperFingerB1" type="fixed">
+    <parent link="GripperAxis" />
+    <child link="GripperFingerB1" />
+    <limit effort="30" velocity="1.74533" />
+    <origin xyz="0.010 0.018 -0.042" rpy="0 0 0.0"/>
+    <axis xyz="0 0 1" />
+  </joint>
+  <link name="GripperFingerB2">
+    <visual>
+      <origin xyz="0.0616 0.0710 0.044" rpy="0.0 3.14 4.66" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0616 0.0710 0.044" rpy="0.0 3.14 4.66" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerB1->GripperFingerB2" type="revolute">
+    <parent link="GripperFingerB1" />
+    <child link="GripperFingerB2" />
+    <limit effort="30" lower="0.0" upper="0.3" velocity="1.74533" />
+    <origin xyz="-0.003 -0.003 -0.008" rpy="0 0 1.1"/>
+    <axis xyz="0 1 0" />
+    <mimic joint="GripperFingerA1->GripperFingerA2" multiplier="-1" offset="0" />
+  </joint>
+  <link name="GripperFingerB3">
+    <visual>
+      <origin xyz="0.0616 0.0710 0.050" rpy="0.0 3.14 4.66" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0616 0.0710 0.050" rpy="0.0 3.14 4.66" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerB2->GripperFingerB3" type="revolute">
+    <parent link="GripperFingerB2" />
+    <child link="GripperFingerB3" />
+    <limit effort="30" lower="0" upper="0.3" velocity="1.74533" />
+    <origin xyz="-0.000 -0.000 -0.006" rpy="0 0 0.0"/>
+    <axis xyz="0 1 0" />
+    <mimic joint="GripperFingerA1->GripperFingerA2" multiplier="-1" offset="0" />
+  </joint>
+  <link name="GripperFingerB4">
+    <visual>
+      <origin xyz="0.0611 0.0710 0.057" rpy="0.0 3.14 4.66" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger4.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0611 0.0710 0.057" rpy="0.0 3.14 4.66" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger4.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerB3->GripperFingerB4" type="revolute">
+    <parent link="GripperFingerB3" />
+    <child link="GripperFingerB4" />
+    <limit effort="30" lower="0." upper="0.3" velocity="1.74533" />
+    <origin xyz="0.0005 0.00 -0.007" rpy="0 0 0.0"/>
+    <axis xyz="0 1 0" />
+    <mimic joint="GripperFingerA1->GripperFingerA2" multiplier="-1" offset="0" />
+  </joint>
+  <link name="GripperFingerB5">
+    <visual>
+      <origin xyz="0.0607 0.0710 0.0641" rpy="0.0 3.14 4.66" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.0607 0.0710 0.0641" rpy="0.0 3.14 4.66" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerB4->GripperFingerB5" type="revolute">
+    <parent link="GripperFingerB4" />
+    <child link="GripperFingerB5" />
+    <limit effort="30" lower="0" upper="0.3" velocity="1.74533" />
+    <origin xyz="0.0005 0.00 -0.007" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+    <mimic joint="GripperFingerA1->GripperFingerA2" multiplier="-1" offset="0" />
+  </joint>
+
+  <link name="GripperFingerC1">
+    <visual>
+      <origin xyz="0.093 -0.010 0.036" rpy="0.0 3.14 3.67" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.054 0.075 0.036" rpy="0.0 3.14 3.67" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperAxis->GripperFingerC1" type="fixed">
+    <parent link="GripperAxis" />
+    <child link="GripperFingerC1" />
+    <limit effort="30" velocity="1.74533" />
+    <origin xyz="0.010 -0.017 -0.042" rpy="0 0 0"/>
+    <axis xyz="0 0 1" />
+  </joint>
+  <link name="GripperFingerC2">
+    <visual>
+      <origin xyz="-0.0555 -0.0753 0.0440" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.0555 -0.0753 0.0440" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerC1->GripperFingerC2" type="revolute">
+    <parent link="GripperFingerC1" />
+    <child link="GripperFingerC2" />
+    <limit effort="30" lower="-0.3" upper="0" velocity="1.74533" />
+    <origin xyz="0.00 0.00 -0.008" rpy="0 0 2.1"/>
+    <axis xyz="0 1 0" />
+    <mimic joint="GripperFingerA1->GripperFingerA2" multiplier="1" offset="0" />
+  </joint>
+  <link name="GripperFingerC3">
+    <visual>
+      <origin xyz="-0.0560 -0.0753 0.0500" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.0560 -0.0753 0.0500" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger3.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerC2->GripperFingerC3" type="revolute">
+    <parent link="GripperFingerC2" />
+    <child link="GripperFingerC3" />
+    <limit effort="30" lower="-0.3" upper="0.0" velocity="1.74533" />
+    <origin xyz="0.0005 0.00 -0.006" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+    <mimic joint="GripperFingerA1->GripperFingerA2" multiplier="1" offset="0" />
+  </joint>
+  <link name="GripperFingerC4">
+    <visual>
+      <origin xyz="-0.0565 -0.0753 0.0570" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger4.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.0565 -0.0753 0.0570" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger4.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerC3->GripperFingerC4" type="revolute">
+    <parent link="GripperFingerC3" />
+    <child link="GripperFingerC4" />
+    <limit effort="30" lower="-0.3" upper="0.0" velocity="1.74533" />
+    <origin xyz="0.0005 0.00 -0.007" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+    <mimic joint="GripperFingerA1->GripperFingerA2" multiplier="1" offset="0" />
+  </joint>
+  <link name="GripperFingerC5">
+    <visual>
+      <origin xyz="-0.0570 -0.0753 0.0640" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.0570 -0.0753 0.0640" rpy="0.0 3.14 1.57" />
+      <geometry>
+        <mesh filename="file://$(find closetbot)/urdf/STL/M02-GripperFinger5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin
+        xyz="-0.087834 0.026992 0.23654"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="1"
+        ixy="0.096223"
+        ixz="0.08423"
+        iyy="1"
+        iyz="0.039079"
+        izz="0.61328" />
+    </inertial>
+  </link>
+  <joint name="GripperFingerC4->GripperFingerC5" type="revolute">
+    <parent link="GripperFingerC4" />
+    <child link="GripperFingerC5" />
+    <limit effort="30" lower="-0.3" upper="0.0" velocity="1.74533" />
+    <origin xyz="0.0005 0.00 -0.007" rpy="0 0 0"/>
+    <axis xyz="0 1 0" />
+    <mimic joint="GripperFingerA1->GripperFingerA2" multiplier="1" offset="0" />
+  </joint>
+
+
+
+
+
+
+
+
+
+
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+      <robotNamespace>/closetbot</robotNamespace>
+      <!-- <parameters>"file://$(find closetbot)/config/ros_controllers.yaml"</parameters> -->
+      <parameters>/home/kraig9/ws_dexarm/src/closetbot/config/gazebo_controllers.yaml</parameters> 
+    </plugin>
+  </gazebo>
+
+  <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+      <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+      <!-- <plugin>closetbot_hardware_interface/ClosetbotHardwareInterface</plugin> -->
+    </hardware>
+    <joint name="bases">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+    <joint name="B_Rot->In_1">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+    <joint name="In_1->Join">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+    <joint name="Join->In_2">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/> 
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+    <joint name="In_2->EE">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+    <joint name="Join->Out_1">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+    <joint name="Join->Out_2">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+    <!-- <joint name="EE->GripperMount">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint> -->
+    <joint name="GripperMount->GripperAxis">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+
+
+    <!-- <joint name="GripperAxis->GripperFingerA1">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint> -->
+    <joint name="GripperFingerA1->GripperFingerA2">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+    <joint name="GripperFingerA2->GripperFingerA3">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+    <joint name="GripperFingerA3->GripperFingerA4">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+    <joint name="GripperFingerA4->GripperFingerA5">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>
+
+
+
+    <!-- <joint name="GripperAxis->GripperFingerB1">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>     -->
+    <joint name="GripperFingerB1->GripperFingerB2">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>    
+    <joint name="GripperFingerB2->GripperFingerB3">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>    
+    <joint name="GripperFingerB3->GripperFingerB4">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>    
+    <joint name="GripperFingerB4->GripperFingerB5">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>    
+
+    <!-- <joint name="GripperAxis->GripperFingerC1">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>     -->
+    <joint name="GripperFingerC1->GripperFingerC2">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>    
+    <joint name="GripperFingerC2->GripperFingerC3">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>    
+    <joint name="GripperFingerC3->GripperFingerC4">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>    
+    <joint name="GripperFingerC4->GripperFingerC5">
+      <dynamics damping="10.0" friction="10.0" />
+      <command_interface name="position">
+        <param name="min">-6.28</param>
+        <param name="max">6.28</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <!-- <state_interface name="velocity"/> -->
+    </joint>    
+  </ros2_control>
+
+    <!-- camera_joint describes where the camera is relative to the arm -->
+    <!-- - Even though the camera isn't moving relative to the arm, it will probably be helpful to have its own link/frame rather than just adding more visuals to the arm -->
+    <!-- - For this example, the camera_link origin will be at the centre of the camera's "sensor" -->
+    <!-- <joint name="camera_joint" type="fixed">
+        <origin xyz="0 .2 0" rpy="0 0 0"/>
+        <parent link="GripperAxis"/>
+        <child link="camera_link"/>        
+    </joint> -->
+    <joint name="camera_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="GripperAxis"/>
+      <child link="camera_link"/>        
+    </joint>
+
+
+    <!-- camera_link describes the camera at the end of the arm -->
+    <!-- - It has multiple visual elements, which ultimately get combined together -->
+    <!-- - Even if we specify different materials, RViz will just colour them all the same as the first -->
+    <!-- - Although we could also specify multiple collision geometries, instead we just use a single box that encompasses the whole camera -->
+    <link name="camera_link">
+        <visual>
+            <origin xyz="-0.03 0 0" rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <box size="0.06 0.15 0.15" />
+            </geometry>
+            <material name="white" />
+        </visual>
+        <!-- <visual>
+            <origin xyz="0.03 0 0" rpy="0 ${pi/2} 0"/>
+            <geometry>
+                <cylinder length="0.06" radius="0.04" />
+            </geometry>
+            <material name="blue" />
+        </visual> -->
+        <visual>
+            <origin xyz="0.03 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder length="0.06" radius="0.04" />
+            </geometry>
+            <material name="blue" />
+        </visual>
+        <collision>
+            <origin xyz="0.0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.12 0.15 0.15" />
+            </geometry>
+        </collision>
+        <!-- <xacro:inertial_box mass="0.1" x="0.12" y="0.15" z="0.15"> -->
+            <!-- <origin xyz="0.0 0 0" rpy="0 0 0"/> -->
+        <!-- </xacro:inertial_box> -->
+        <xacro:inertial_box mass="1" x="0.12" y="0.15" z="0.15">
+            <origin xyz="0.0 0 0" rpy="0 ${pi/2} 0"/>
+        </xacro:inertial_box>
+    </link>
+
+      <!-- First, create the link and joint for the optical frame -->
+
+    <!-- <joint name="camera_optical_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="-1.571 0 -1.571" />
+        <parent link="camera_link" />
+        <child link="camera_link_optical" />
+    </joint> -->
+    <joint name="camera_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="-1.571 0 ${pi}" />
+      <parent link="camera_link" />
+      <child link="camera_link_optical" />
+    </joint>
+
+    <link name="camera_link_optical"></link>
+
+
+    <!-- Add a gazebo tag for the ORIGINAL camera_link (but in the plugin we reference the optical frame so that ROS can orient things correctly) -->
+    <!-- Within the gazebo tag we have the sensor tag, and inside that there is (among other things) the camera tag with the camera parameters, 
+            and the plugin tag with some extra parameters the plugin needs. -->
+    <!-- Note that although visualise is set to true, it won't actually visualise the depth camera in gazebo. To see the preview, 
+            try swapping "depth" to "camera"-->
+    <gazebo reference="camera_link">
+        <sensor type="depth" name="my_camera">
+            <update_rate>20</update_rate>
+            <visualize>true</visualize>
+            <camera name="cam">
+                <horizontal_fov>1.3962634</horizontal_fov>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                </image>
+                <clip>
+                    <near>0.02</near>
+                    <far>300</far>
+                </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.007</stddev>
+                </noise>
+            </camera>
+            <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+                <frame_name>camera_link_optical</frame_name>
+                <min_depth>0.1</min_depth>
+                <max_depth>500</max_depth>
+            </plugin>
+        </sensor>
+    </gazebo>
+</robot>

@@ -1,0 +1,10 @@
+ros2 topic pub -1 /set_joint_trajectory trajectory_msgs/msg/JointTrajectory  '{header: {frame_id: world}, joint_names: [shoulder_joint, elbow_joint, arm_joint, grip_joint, gripper_joint, endeffector_joint, elbow_joint], points: [  {positions: {0.8,0.6, 0.6, 0.6, 0.6, 0.6, 0.6}} ]}'
+
+
+ros2 run simple_grasping basic_grasping_perception_node --ros-args -p debug_topics:=true
+
+ros2 action send_goal /find_objects grasping_msgs/action/FindGraspableObjects "{plan_grasps: false}"
+
+ros2 run moveit2_scripts test_trajectory2 
+
+ros2 launch moveit2_scripts test_trajectory2.launch.py

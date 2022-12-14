@@ -1,0 +1,28 @@
+disparity_node:
+  ros__parameters:
+    # Changes syncronization technique between the two image queues
+    approximate_sync: True
+
+    # Normalization window size in pixels (must be odd); default 9
+    prefilter_size: 9
+    # Bound on normalized pixel values; default 31
+    prefilter_cap: 31
+
+    # SAD correlation window width in pixels (must be odd); default 15
+    correlation_window_size: 51
+
+    # Disparity to begin search at in pixels; default 0
+    min_disparity: 0
+    # Number of disparities to search in pixels (must be a multiple of 16); default 64
+    disparity_range: 64
+
+    # Filter out if SAD window response does not exceed texture threshold; default 10
+    texture_threshold: 10
+
+    # Reject regions smaller than this size in pixels; default 100
+    speckle_size: 1000
+    # Maximum allowed difference between detected disparities; default 4
+    speckle_range: 4
+
+    # Filter out if best match does not sufficiently exceed the next-best match; default 15.0
+    uniqueness_ratio: 1.0

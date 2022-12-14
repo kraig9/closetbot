@@ -1,0 +1,37 @@
+controller_names:
+  - joint_trajectory_controller
+
+joint_trajectory_controller:
+  action_ns: follow_joint_trajectory
+  type: FollowJointTrajectory
+  default: true
+  joints:
+    - bases
+    - B_Rot->In_1
+    # - In_1->Join
+    - Join->In_2
+    # - In_2->EE
+    # - Join->Out_1
+    # - Join->Out_2
+
+    # - EE->GripperMount
+
+    - GripperMount->GripperAxis
+
+    # - GripperAxis->GripperFingerA1
+    - GripperFingerA1->GripperFingerA2
+    # - GripperFingerA2->GripperFingerA3
+    # - GripperFingerA3->GripperFingerA4
+    # - GripperFingerA4->GripperFingerA5
+
+    # # - GripperAxis->GripperFingerB1
+    # - GripperFingerB1->GripperFingerB2
+    # - GripperFingerB2->GripperFingerB3
+    # - GripperFingerB3->GripperFingerB4
+    # - GripperFingerB4->GripperFingerB5
+
+    # # - GripperAxis->GripperFingerB1
+    # - GripperFingerC1->GripperFingerC2
+    # - GripperFingerC2->GripperFingerC3
+    # - GripperFingerC3->GripperFingerC4
+    # - GripperFingerC4->GripperFingerC5
