@@ -2,6 +2,7 @@ build/*
 log/*
 install/*
 src/*
+!src/moveit2_scripts
 !src/closetbot
 src/closetbot/urdf/STL/00-B_Fix.stl
 src/closetbot/urdf/STL/01-B_Rot.stl
@@ -78,3 +79,5 @@ src/closetbot/.vscode/browse.vc.db
 src/closetbot/.vscode/browse.vc.db-shm
 src/closetbot/.vscode/browse.vc.db-wal
 cuda-keyring_1.0-1_all.deb
+src/moveit2_scripts/launch/__pycache__/test_trajectory2.launch.cpython-310.pyc
+src/moveit2_scripts/launch/__pycache__/test_trajectory2.launch.cpython-38.pyc
