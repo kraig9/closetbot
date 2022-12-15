@@ -7,6 +7,8 @@ endif()
 
 add_executable(test_trajectory2
   src/test_trajectory2.cpp)
+add_executable(grasp
+  src/grasp.cpp)
 
 
 
@@ -30,6 +32,11 @@ ament_target_dependencies(test_trajectory2 rviz_visual_tools )
 ament_target_dependencies(test_trajectory2 moveit_ros_planning ) 
 ament_target_dependencies(test_trajectory2 moveit_ros_planning_interface ) 
 
+ament_target_dependencies(grasp moveit_core ) 
+ament_target_dependencies(grasp rviz_visual_tools ) 
+ament_target_dependencies(grasp moveit_ros_planning ) 
+ament_target_dependencies(grasp moveit_ros_planning_interface ) 
+
 target_include_directories(test_trajectory2
   PUBLIC include)
 
@@ -37,6 +44,18 @@ install(TARGETS
 	test_trajectory2
     DESTINATION lib/${PROJECT_NAME}
 )
+
+
+
+target_include_directories(grasp
+  PUBLIC include)
+
+install(TARGETS 
+	grasp
+    DESTINATION lib/${PROJECT_NAME}
+)
+
+
 
 # Install the launch file
 install(DIRECTORY 
