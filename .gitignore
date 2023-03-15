@@ -82,3 +82,6 @@ src/closetbot/.vscode/browse.vc.db-wal
 cuda-keyring_1.0-1_all.deb
 src/moveit2_scripts/launch/__pycache__/test_trajectory2.launch.cpython-310.pyc
 src/moveit2_scripts/launch/__pycache__/test_trajectory2.launch.cpython-38.pyc
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json
