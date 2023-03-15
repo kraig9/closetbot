@@ -4,6 +4,7 @@ install/*
 src/*
 !src/moveit2_scripts
 !src/closetbot
+!src/closetbot-ai
 src/closetbot/urdf/STL/00-B_Fix.stl
 src/closetbot/urdf/STL/01-B_Rot.stl
 src/closetbot/urdf/STL/02-In_1.stl
