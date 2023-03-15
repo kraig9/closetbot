@@ -1,0 +1,3 @@
+class closet_frame {
+    
+};

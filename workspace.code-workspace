@@ -129,6 +129,6 @@
 			"/home/kraig9/ws_moveit2/install/cv_bridge/lib/python3.8/site-packages",
 			"/opt/ros/galactic/lib/python3.8/site-packages"
 		],
-		"ros.distro": "galactic"
+		"ros.distro": "humble"
 	}
 }
