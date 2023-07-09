@@ -419,13 +419,22 @@ def generate_launch_description():
 
     nodes_to_start = [
         control_node,
+
         # joint_state_broadcaster_spawner,
+
+
         delay_joint_state_broadcaster_spawner_after_robot_controller_spawner,
+
+
+
         robot_state_publisher_node,
         delay_rviz_after_joint_state_broadcaster_spawner,
         delay_move_group_node_after_gazebo_spawn_entity,
         gazebo,
         gazebo_spawn_entity,
+
+
+
         # delay_gazebo_spawn_cube_node_after_gazebo_spawn_entity,
         # joint_state_broadcaster_spawner,
         # rviz_node,
