@@ -318,6 +318,7 @@ def generate_launch_description():
         cmd=['ros2', 'control', 'load_controller', 'joint_trajectory_controller'],
         output='screen'
     )
+    print("here3")
 
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
@@ -325,11 +326,13 @@ def generate_launch_description():
                 )]), launch_arguments={'use_sim_time': 'true'}.items()
     )
 
+    print("here4")
+
     # Include the Gazebo launch file, provided by the gazebo_ros package
     gazebo = IncludeLaunchDescription(
                 # PythonLaunchDescriptionSource([os.path.join(
                 #     get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')]),
-                PythonLaunchDescriptionSource('/opt/ros/humble/share/gazebo_ros/launch/gazebo.launch.py'),
+                PythonLaunchDescriptionSource('/opt/ros/iron/share/gazebo_ros/launch/gazebo.launch.py'),
                 launch_arguments={'verbose' : 'true'}.items()
              )
 
@@ -340,13 +343,15 @@ def generate_launch_description():
                     parameters=[use_sim_time],
                     output='screen')
 
-    gazebo_spawn_cube = Node(package='gazebo_ros',
-    executable='spawn_entity.py',
-                    arguments=['-file', '/home/ws_moveit2/src/simple_grasping/grasp_box.urdf',
-                                '-entity', 'cube',
-                                '-x', '-3'],
-                    parameters=[use_sim_time],
-                    output='screen')
+    # gazebo_spawn_cube = Node(package='gazebo_ros',
+    # executable='spawn_entity.py',
+    #                 arguments=['-file', '/home/ws_moveit2/src/simple_grasping/grasp_box.urdf',
+    #                             '-entity', 'cube',
+    #                             '-x', '-3'],
+    #                 parameters=[use_sim_time],
+    #                 output='screen')
+    
+    # print("here5")
 
     # Static TF
     static_tf = Node(package='tf2_ros',
@@ -390,12 +395,13 @@ def generate_launch_description():
         )
     )
 
-    delay_gazebo_spawn_cube_node_after_gazebo_spawn_entity = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=gazebo_spawn_entity,
-            on_exit=[gazebo_spawn_cube],
-        )
-    )
+    # delay_gazebo_spawn_cube_node_after_gazebo_spawn_entity = RegisterEventHandler(
+    #     event_handler=OnProcessExit(
+    #         target_action=gazebo_spawn_entity,
+    #         on_exit=[gazebo_spawn_cube],
+    #     )
+    # )
+    print("here6")
 
     move_group_demo = Node(
         name="test_trajectory",
@@ -409,7 +415,7 @@ def generate_launch_description():
             kinematics_yaml,
             ],
     )
-
+    print("here7")
 
     nodes_to_start = [
         control_node,
