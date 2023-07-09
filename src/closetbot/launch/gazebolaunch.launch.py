@@ -260,8 +260,8 @@ def generate_launch_description():
             trajectory_execution,
             moveit_controllers,
             planning_scene_monitor_parameters,
-            octomap_config,
-            octomap_updater_config,
+            # octomap_config,
+            # octomap_updater_config,
             # sensors,
             use_sim_time
         ],
