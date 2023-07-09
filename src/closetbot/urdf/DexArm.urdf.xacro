@@ -959,7 +959,7 @@
       <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
       <robotNamespace>/closetbot</robotNamespace>
       <!-- <parameters>"file://$(find closetbot)/config/ros_controllers.yaml"</parameters> -->
-      <parameters>/home/kraig9/ws_dexarm/src/closetbot/config/gazebo_controllers.yaml</parameters> 
+      <parameters>/home/closetbot/src/closetbot/config/gazebo_controllers.yaml</parameters> 
     </plugin>
   </gazebo>
 

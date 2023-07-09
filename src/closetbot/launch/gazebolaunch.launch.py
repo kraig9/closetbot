@@ -427,7 +427,7 @@ def generate_launch_description():
 
 
         robot_state_publisher_node,
-        # delay_rviz_after_joint_state_broadcaster_spawner,
+        delay_rviz_after_joint_state_broadcaster_spawner,
         delay_move_group_node_after_gazebo_spawn_entity,
         gazebo,
         gazebo_spawn_entity,
@@ -437,7 +437,7 @@ def generate_launch_description():
         # delay_gazebo_spawn_cube_node_after_gazebo_spawn_entity,
         # joint_state_broadcaster_spawner,
 
-        rviz_node,
+        # rviz_node,
     ]
 
     return LaunchDescription(
