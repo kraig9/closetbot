@@ -46,7 +46,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_file",
-            default_value="/home/kraig9/ws_dexarm/src/closetbot/urdf/DexArm.urdf.xacro",
+            default_value="/home/closetbot/src/closetbot/urdf/DexArm.urdf.xacro",
             description="URDF/XACRO description file with the robot.",
         )
     )
@@ -62,21 +62,21 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_file",
-            default_value="/home/kraig9/ws_dexarm/src/closetbot/urdf/DexArm.srdf.xacro",
+            default_value="/home/closetbot/src/closetbot/urdf/DexArm.srdf.xacro",
             description="MoveIt SRDF/XACRO description file with the robot.",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_sensor_manager",
-            default_value="/home/kraig9/ws_dexarm/src/closetbot/config/sensors_3d.yaml",
+            default_value="/home/closetbot/src/closetbot/config/sensors_3d.yaml",
             description="MoveIt SRDF/XACRO description file with the robot.",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
             "controllers_file",
-            default_value="/home/kraig9/ws_dexarm/src/closetbot/ros_controllers.yaml",
+            default_value="/home/closetbot/src/closetbot/ros_controllers.yaml",
             description="YAML file with the controllers configuration.",
         )
     )
@@ -104,7 +104,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "world",
-            default_value='/home/kraig9/ws_dexarm/src/closetbot/gazebo_worlds/yolo_test.world',
+            default_value='/home/closetbot/src/closetbot/gazebo_worlds/yolo_test.world',
             description="SDF world file"
         )
     )
@@ -121,13 +121,14 @@ def generate_launch_description():
     robot_controller = LaunchConfiguration("robot_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
 
+
     use_sim_time = {"use_sim_time" : True}
 
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            "/home/kraig9/ws_dexarm/src/closetbot/urdf/DexArm.urdf.xacro",
+            "/home/closetbot/src/closetbot/urdf/DexArm.urdf.xacro",
             " ",
             "name:=",
             "dexarm",
@@ -139,14 +140,14 @@ def generate_launch_description():
     robot_description = {"robot_description": robot_description_content}
 
 
-    robot_controllers = "/home/kraig9/ws_dexarm/src/closetbot/config/ros_controllers.yaml"
+    robot_controllers = "/home/closetbot/src/closetbot/config/ros_controllers.yaml"
 
     # MoveIt Configuration
     robot_description_semantic_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            "/home/kraig9/ws_dexarm/src/closetbot/urdf/DexArm.srdf.xacro"
+            "/home/closetbot/src/closetbot/urdf/DexArm.srdf.xacro"
             " ",
             "name:=",
             dexarm,
@@ -161,7 +162,7 @@ def generate_launch_description():
     }
 
     # Load kinematics yaml
-    kinematics_yaml = load_yaml("closetbot", "/home/kraig9/ws_dexarm/src/closetbot/config/kinematics.yaml")
+    kinematics_yaml = load_yaml("closetbot", "/home/closetbot/src/closetbot/config/kinematics.yaml")
     robot_description_kinematics = {"robot_description_kinematics": kinematics_yaml}
 
     # Planning Configuration
@@ -173,14 +174,15 @@ def generate_launch_description():
         }
     }
 
+    print("hi")
     # TODO(destogl): change this hard-coded name to "description_package"
     ompl_planning_yaml = load_yaml(
-        "closetbot", "/home/kraig9/ws_dexarm/src/closetbot/config/ompl_planning.yaml"
+        "closetbot", "/home/closetbot/src/closetbot/config/ompl_planning.yaml"
     )
     ompl_planning_pipeline_config["move_group"].update(ompl_planning_yaml)
 
     # Trajectory Execution Configuration
-    controllers_yaml = load_yaml("closetbot", "/home/kraig9/ws_dexarm/src/closetbot/config/controllers.yaml")
+    controllers_yaml = load_yaml("closetbot", "/home/closetbot/src/closetbot/config/controllers.yaml")
     print (controllers_yaml)
     moveit_controllers = {
         "moveit_simple_controller_manager": controllers_yaml,
@@ -210,7 +212,7 @@ def generate_launch_description():
         },
     }
     # rviz with moveit configuration
-    rviz_config_file = "/home/kraig9/ws_dexarm/src/closetbot/rviz/view_robot.rviz"
+    rviz_config_file = "/home/closetbot/src/closetbot/rviz/view_robot.rviz"
 
     rviz_node = Node(
         package="rviz2",
@@ -237,14 +239,14 @@ def generate_launch_description():
 
     # Start the actual move_group node/action server
     print("here")
-    sensors_yaml = load_yaml("closetbot", "/home/kraig9/ws_dexarm/src/closetbot/config/sensors_3d.yaml")
+    sensors_yaml = load_yaml("closetbot", "/home/closetbot/src/closetbot/config/sensors_3d.yaml")
     sensors = {"moveit_sensor_manager": sensors_yaml}
 
     octomap_config = {'octomap_frame': 'camera_rgb_optical_frame', 
                       'octomap_resolution': 0.05,
                       'max_range': 5.0}
 
-    octomap_updater_config = load_yaml('closetbot', '/home/kraig9/ws_dexarm/src/closetbot/config/sensors_3d.yaml')
+    octomap_updater_config = load_yaml('closetbot', '/home/closetbot/src/closetbot/config/sensors_3d.yaml')
 
     move_group_node = Node(
         package="moveit_ros_move_group",
@@ -275,14 +277,14 @@ def generate_launch_description():
         }
     }
 
-    cam_params = {"video_device": "/dev/video0", "camera_name" : "usb_cam", "camera_info_url" : "file:///home/kraig9/ws_dexarm/src/closetbot/config/camera/usb_cam.yaml"}
+    cam_params = {"video_device": "/dev/video0", "camera_name" : "usb_cam", "camera_info_url" : "file:///home/closetbot/src/closetbot/config/camera/usb_cam.yaml"}
     camera_node = Node(
         package="usb_cam",
         executable="usb_cam_node_exe",
         parameters=[cam_params, use_sim_time],
     )
 
-    cam2_params = {"video_device": "/dev/video1", "camera_name" : "usb_cam2", "camera_info_url" : "file:///home/kraig9/ws_dexarm/src/closetbot/config/camera/usb_cam2.yaml"}
+    cam2_params = {"video_device": "/dev/video1", "camera_name" : "usb_cam2", "camera_info_url" : "file:///home/closetbot/src/closetbot/config/camera/usb_cam2.yaml"}
     camera2_node = Node(
         package="usb_cam",
         executable="usb_cam_node_exe",
@@ -340,7 +342,7 @@ def generate_launch_description():
 
     gazebo_spawn_cube = Node(package='gazebo_ros',
     executable='spawn_entity.py',
-                    arguments=['-file', '/home/kraig9/ws_moveit2/src/simple_grasping/grasp_box.urdf',
+                    arguments=['-file', '/home/ws_moveit2/src/simple_grasping/grasp_box.urdf',
                                 '-entity', 'cube',
                                 '-x', '-3'],
                     parameters=[use_sim_time],
