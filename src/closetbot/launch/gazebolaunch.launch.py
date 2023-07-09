@@ -220,7 +220,7 @@ def generate_launch_description():
         executable="rviz2",
         name="rviz2_moveit",
         output="log",
-        arguments=["-d", rviz_config_file],
+        # arguments=["-d", rviz_config_file],
         parameters=[
             robot_description,
             robot_description_semantic,
@@ -420,7 +420,6 @@ def generate_launch_description():
     nodes_to_start = [
         control_node,
 
-        # joint_state_broadcaster_spawner,
 
 
         delay_joint_state_broadcaster_spawner_after_robot_controller_spawner,
@@ -428,16 +427,17 @@ def generate_launch_description():
 
 
         robot_state_publisher_node,
-        delay_rviz_after_joint_state_broadcaster_spawner,
+        # delay_rviz_after_joint_state_broadcaster_spawner,
         delay_move_group_node_after_gazebo_spawn_entity,
         gazebo,
         gazebo_spawn_entity,
 
 
-
+        # joint_state_broadcaster_spawner,
         # delay_gazebo_spawn_cube_node_after_gazebo_spawn_entity,
         # joint_state_broadcaster_spawner,
-        # rviz_node,
+
+        rviz_node,
     ]
 
     return LaunchDescription(
