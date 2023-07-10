@@ -969,7 +969,7 @@
       <!-- <plugin>closetbot_hardware_interface/ClosetbotHardwareInterface</plugin> -->
     </hardware>
     <joint name="bases">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -978,7 +978,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>
     <joint name="B_Rot->In_1">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -987,7 +987,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>
     <joint name="In_1->Join">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -996,7 +996,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>
     <joint name="Join->In_2">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1005,7 +1005,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>
     <joint name="In_2->EE">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1014,7 +1014,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>
     <joint name="Join->Out_1">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1023,7 +1023,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>
     <joint name="Join->Out_2">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1032,7 +1032,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>
     <!-- <joint name="EE->GripperMount">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1041,7 +1041,7 @@
       <state_interface name="velocity"/>
     </joint> -->
     <joint name="GripperMount->GripperAxis">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1050,7 +1050,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>
     <joint name="GripperFingerA1->GripperFingerA2">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1059,7 +1059,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>
     <joint name="GripperFingerA2->GripperFingerA3">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1068,7 +1068,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>
     <joint name="GripperFingerA3->GripperFingerA4">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1077,7 +1077,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>
     <joint name="GripperFingerA4->GripperFingerA5">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1089,7 +1089,7 @@
 
 
     <!-- <joint name="GripperAxis->GripperFingerB1">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1098,7 +1098,7 @@
       <state_interface name="velocity"/>
     </joint>     -->
     <joint name="GripperFingerB1->GripperFingerB2">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1107,7 +1107,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>    
     <joint name="GripperFingerB2->GripperFingerB3">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1116,7 +1116,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>    
     <joint name="GripperFingerB3->GripperFingerB4">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1125,7 +1125,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>    
     <joint name="GripperFingerB4->GripperFingerB5">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1135,7 +1135,7 @@
     </joint>    
 
     <!-- <joint name="GripperAxis->GripperFingerC1">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1144,7 +1144,7 @@
       <state_interface name="velocity"/>
     </joint>     -->
     <joint name="GripperFingerC1->GripperFingerC2">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1153,7 +1153,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>    
     <joint name="GripperFingerC2->GripperFingerC3">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1162,7 +1162,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>    
     <joint name="GripperFingerC3->GripperFingerC4">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>
@@ -1171,7 +1171,7 @@
       <!-- <state_interface name="velocity"/> -->
     </joint>    
     <joint name="GripperFingerC4->GripperFingerC5">
-      <dynamics damping="10.0" friction="10.0" />
+      <dynamics damping="100.0" friction="100.0" />
       <command_interface name="position">
         <param name="min">-6.28</param>
         <param name="max">6.28</param>

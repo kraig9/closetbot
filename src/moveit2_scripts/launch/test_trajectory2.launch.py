@@ -81,14 +81,14 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_file",
-            default_value="/home/kraig9/ws_dexarm/src/closetbot/urdf/DexArmHardware.urdf.xacro",
+            default_value="/home/closetbot/src/closetbot/urdf/DexArmHardware.urdf.xacro",
             description="URDF/XACRO description file with the robot.",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
             "moveit_config_file",
-            default_value="/home/kraig9/ws_dexarm/src/closetbot/urdf/DexArmHardware.srdf.xacro",
+            default_value="/home/closetbot/src/closetbot/urdf/DexArmHardware.srdf.xacro",
             description="MoveIt SRDF/XACRO description file with the robot.",
         )
     )
@@ -121,7 +121,7 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             # PathJoinSubstitution([FindPackageShare(description_package), "urdf", description_file]),
-            "/home/kraig9/ws_dexarm/src/closetbot/urdf/DexArm.urdf.xacro"
+            "/home/closetbot/src/closetbot/urdf/DexArm.urdf.xacro"
             " ",
             "name:=",
             # Also, ur_type parameter could be used, but then the planning group names in YAML
@@ -137,7 +137,7 @@ def generate_launch_description():
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
-            "/home/kraig9/ws_dexarm/src/closetbot/urdf/DexArm.srdf.xacro"
+            "/home/closetbot/src/closetbot/urdf/DexArm.srdf.xacro"
             " ",
             "name:=",
             "DexArm_unofficial",
@@ -149,7 +149,7 @@ def generate_launch_description():
     }
 
     # Load kinematics yaml
-    kinematics_yaml = load_yaml("closetbot", "/home/kraig9/ws_dexarm/src/closetbot/config/kinematics.yaml")
+    kinematics_yaml = load_yaml("closetbot", "/home/closetbot/src/closetbot/config/kinematics.yaml")
     robot_description_kinematics = {"robot_description_kinematics": kinematics_yaml}
 
     # MoveGroupInterface demo executable
